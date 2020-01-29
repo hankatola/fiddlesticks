@@ -105,7 +105,7 @@ const main = (x, confidenceThreshold=.75, maxLengthDiff=.25) => {
   // look for a match in aliases, return if found
   // from here on only deal w/ cleaned variable
   const cleaned = clean(x)
-  if (aliases[x]) return console.log(`${x} is a known alias for ${aliases[x]}, which already exists in the library`)
+  if (aliases[cleaned]) return console.log(`${x} is a known alias for ${aliases[cleaned]}, which already exists in the library`)
   // #endregion look for matches
 
 
@@ -138,7 +138,7 @@ const main = (x, confidenceThreshold=.75, maxLengthDiff=.25) => {
 
   //#region     Return Decision
   const matchNum = possibleMatches.length
-  if (matchNum === 1) return console.log(`${cleaned} is a new alias for ${possibleMatches[0]}`)
+  if (matchNum === 1) return console.log(`${x} cleans to ${cleaned}, which is a new alias for ${possibleMatches[0]}`)
   const bestMatch = []
   if (matchNum > 1) {
     // return the most likely match or matches
@@ -149,7 +149,7 @@ const main = (x, confidenceThreshold=.75, maxLengthDiff=.25) => {
   }
   if (bestMatch.length === 0) return console.log(`${x} not found in strains or aliases. ${x} is a new strain`)
   else {
-    return console.log('I need help deciding between these:\n',bestMatch)
+    return console.log(`${x} is equally likely to be one of these:\n${bestMatch}`)
   }
   //#endregion  Return Decision
 
